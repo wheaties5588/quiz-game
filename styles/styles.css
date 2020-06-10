@@ -1,0 +1,75 @@
+* {
+    font-family: 'Fjalla One', sans-serif;
+}
+body {
+    margin: auto;
+}
+.nav-back {
+    background-color: #31233c!important;
+}
+.navbar-nav {
+    margin-left: auto;
+}
+.navbar-expand-lg .navbar-nav {
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+.navbar-nav .nav-link {
+    padding-right: .5rem;
+    padding-left: .5rem;
+}
+.timerDiv {
+    width: 100%;
+    margin: auto 0px 30px auto;
+    text-align: center;
+    padding: 25px;
+    background-color: gainsboro;
+    box-shadow: 2px 2px 7px black;
+}
+.timerText {
+    margin: auto;
+    font-size: 25px;
+}
+
+.startBtn {
+    padding: 15px 35px;
+    font-size: 25px;
+}
+
+.quizDiv {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 200px;
+    box-shadow: 2px 2px 7px black;
+}
+.quizDiv img {
+    width: 100%;
+}
+
+.startDiv {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.questionDiv {
+    padding: 30px;
+    text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+    .navbar-brand {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+    }
+    .navbar-nav {
+        margin: auto;
+    }
+}
