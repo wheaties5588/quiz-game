@@ -4,6 +4,9 @@
 body {
     margin: auto;
 }
+h1 {
+    font-size: 35px;
+}
 h2 {
     font-size: 30px;
 }
@@ -40,6 +43,15 @@ h2 {
 .startBtn {
     padding: 15px 35px;
     font-size: 25px;
+}
+.rulesDiv {
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+.rulesList {
+    list-style-type: none;
+    padding: 0px;
 }
 .quizDiv {
     position: relative;
@@ -112,6 +124,9 @@ h2 {
 }
 
 @media screen and (max-width: 767px) {
+    h1 {
+        font-size: 25px;
+    }
     h2 {
         font-size: 20px;
         margin-bottom: 0px;
@@ -132,6 +147,9 @@ h2 {
     }
     .timerText {
         font-size: 20px;
+    }
+    .rulesList {
+        font-size: 12px;
     }
     .quizDiv {
         min-height: 20px;

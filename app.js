@@ -11,10 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
         var navList = document.createElement("ul");
         var navBarCol = document.createElement("div");
         var navLinks = {
-            topScores: {
-                name: "High Scores",
-                link: "./highscores.html",
-            },
+            //topScores: {
+            //    name: "High Scores",
+            //    link: "./highscores.html",
+            //},
             gitHub: {
                 name: "Creator GitHub",
                 link: "https://www.github.com/wheaties5588",
@@ -124,7 +124,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Create a div that houses the rules that show on the start screen
     function rulesBlock() {
+        var mainDiv = document.getElementById("mainContainer");
+        var rulesDiv = document.createElement("div");
+        var rulesHeader = document.createElement("h1");
+        var ul = document.createElement("ul");
+        var rulesList = [
+            "90 Seconds to complete the quiz",
+            "10 questions",
+            "5 points for every correct answer",
+            "5 seconds off the clock for every incorrect answer",
+            "No magic allowed..."
+        ]
 
+        ul.id = "rulesList";
+        ul.className = "rulesList";
+
+        for (i = 0; i < rulesList.length; i++) {
+            var li = document.createElement("li");
+            li.innerText = rulesList[i];
+            ul.appendChild(li);
+        }
+
+        console.log(ul);
+
+        rulesDiv.id = "rulesDiv";
+        rulesDiv.className = "rulesDiv";
+
+        rulesHeader.id = "rulesHeader";
+        rulesHeader.className = "rulesHeader";
+        rulesHeader.innerText = "Harry Potter Trivia Rules:";
+
+        rulesDiv.appendChild(rulesHeader);
+        rulesDiv.appendChild(ul);
+        mainDiv.appendChild(rulesDiv);
     }
 
 
@@ -133,6 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
     createTopNav();
     createMain();
     timerDiv();
+    rulesBlock();
     createQuizDiv();
 
 
@@ -249,6 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
             score = 0;
             questionCount = 0;
 
+            document.getElementById("rulesDiv").style.display ="none";
             startTimer();
             renderQuestion();
         })
@@ -350,7 +384,6 @@ document.addEventListener("DOMContentLoaded", () => {
             timer.innerText = "Finished!";
         }
     }
-
 
     //Game over Function
     function endGame() {
@@ -470,7 +503,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return container;
     }
-
-
 })
-
