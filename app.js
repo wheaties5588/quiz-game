@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
         var rulesHeader = document.createElement("h1");
         var ul = document.createElement("ul");
         var rulesList = [
-            "90 Seconds to complete the quiz",
+            "60 Seconds to complete the quiz",
             "10 questions",
             "5 points for every correct answer",
             "5 seconds off the clock for every incorrect answer",
@@ -294,7 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var myTimer;
 
     function startTimer() {
-        questionTime = 90;
+        questionTime = 60;
         var timer = document.getElementById("timerCount");
         timer.innerText = questionTime;
 

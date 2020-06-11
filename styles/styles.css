@@ -44,6 +44,9 @@ h2 {
     padding: 15px 35px;
     font-size: 25px;
 }
+.startBtn:hover {
+    background-color: #bfbfbf;
+}
 .rulesDiv {
     text-align: center;
     padding: 20px;
@@ -149,7 +152,7 @@ h2 {
         font-size: 20px;
     }
     .rulesList {
-        font-size: 12px;
+        font-size: 14px;
     }
     .quizDiv {
         min-height: 20px;
@@ -157,6 +160,7 @@ h2 {
     .startBtn {
         padding: 10px 20px;
         font-size: 18px;
+        background-color: white;
     }
     .answerBtn {
         font-size: 16px;
