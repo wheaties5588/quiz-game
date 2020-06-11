@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Yer a wizard, Harry...");
-    console.log(window.location.href);
 
     // Create "nav" div that will house the link to the high scores page and the timer
     // And also include the page title
@@ -25,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         header.id = "header";
 
         topNav.id = "topNav";
-        topNav.className = "navbar navbar-expand-lg navbar-dark nav-back"
+        topNav.classpanName = "navbar navbar-exd-lg navbar-dark nav-back"
 
         brand.className = "navbar-brand";
         brand.setAttribute("href", "./index.html");
@@ -122,6 +121,13 @@ document.addEventListener("DOMContentLoaded", () => {
         mainDiv.appendChild(div);
     }
 
+    //Create a div that houses the rules that show on the start screen
+    function rulesBlock() {
+
+    }
+
+
+
     //Create HTML elements
     createTopNav();
     createMain();
@@ -131,18 +137,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Game Functionality
     var score;
+    var questionCount;
 
-    var questionCount = 0;
-    var questions = {
-        q1: {
+    var questions = [
+        {
             question: "What is Harry's last name?",
-            ans1: "Smith",
+            ans1: "Styles",
             ans2: "Potter",
             ans3: "Dumbledore",
             ans4: "Snape",
             correctAns: "Potter"
         },
-        q2: {
+        {
             question: "What is the name of Albus Dumbledore's brother?",
             ans1: "Aberforth",
             ans2: "James",
@@ -150,23 +156,97 @@ document.addEventListener("DOMContentLoaded", () => {
             ans4: "Ron",
             correctAns: "Aberforth"
         },
-        q3: {
+        {
             question: "When Dumbledore dies, who becomes the rightful owner of the Elder Wand?",
             ans1: "Harry Potter",
             ans2: "Bellatrix Lestrange",
             ans3: "Draco Malfoy",
             ans4: "Severus Snape",
             correctAns: "Draco Malfoy"
+        },
+        {
+            question: "What flavored 'Bertie Botts Every Flavored Bean' did Professor Dumbledore eat in 'Harry Potter and the Sorcerer's Stone'?",
+            ans1: "Boogers",
+            ans2: "Earwax",
+            ans3: "Toffee",
+            ans4: "Vomit",
+            correctAns: "Earwax"
+        },
+        {
+            question: "What are wizards called that can transform into an animal?",
+            ans1: "Tranimal",
+            ans2: "Pet",
+            ans3: "Animal Wizard",
+            ans4: "Animagus",
+            correctAns: "Animagus"
+        },
+        {
+            question: "Who is Ron's girlfiend in 'Harry Potter and the Half Blood Prince'?",
+            ans1: "Parvarti Patel",
+            ans2: "Lavendar Brown",
+            ans3: "Luna Lovegood",
+            ans4: "Hermione Granger",
+            correctAns: "Lavendar Brown"
+        },
+        {
+            question: "What gift from Neville's grandmother does Malfoy steal?",
+            ans1: "Remembrall",
+            ans2: "Chocolate Frog",
+            ans3: "Nimbus 2000",
+            ans4: "Foe Glass",
+            correctAns: "Remembrall"
+        },
+        {
+            question: "What model broomstick does the Slytherin Quiddich team ride in 'Harry Potter and the Chamber of Secrets'?",
+            ans1: "Firebolt",
+            ans2: "Clean Sweep",
+            ans3: "Nimbus 2000",
+            ans4: "Nimbus 2001",
+            correctAns: "Nimbus 2001"
+        },
+        {
+            question: "Which team wins the Quiddich World Cup before Harry's 4th year at Hogwarts?",
+            ans1: "Ireland",
+            ans2: "Bulgaria",
+            ans3: "England",
+            ans4: "Spain",
+            correctAns: "Ireland"
+        },
+        {
+            question: "How many Horcruxes did Tom Riddle make?",
+            ans1: "2",
+            ans2: "10",
+            ans3: "7",
+            ans4: "22",
+            correctAns: "7"
+        }
+    ]
+
+    //Randomize Questions
+    function randomizeQuestions(arr) {
+
+        for (i = 0; i < 1000; i++) {
+            var loc1, loc2, tmp;
+            loc1 = Math.floor(Math.random() * arr.length);
+            loc2 = Math.floor(Math.random() * arr.length);
+            tmp = arr[loc1];
+            arr[loc1] = arr[loc2];
+            arr[loc2] = tmp;
         }
     }
+
+    randomizeQuestions(questions);
+
 
     //Start Game - give functionality to the start button
     var startButton = document.getElementById("startBtn");
 
     //Function to add start game sunctionality to item
     function play(x) {
-        x.addEventListener("click", function(){
+        x.addEventListener("click", function(ev){
+            ev.preventDefault();
             score = 0;
+            questionCount = 0;
 
             startTimer();
             renderQuestion();
@@ -187,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var myTimer;
 
     function startTimer() {
-        questionTime = 5;
+        questionTime = 90;
         var timer = document.getElementById("timerCount");
         timer.innerText = questionTime;
 
@@ -196,8 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 questionTime--;
                 timer.innerHTML = questionTime;
             } else {
-                clearInterval(myTimer);
-                timerGameOver();
+                endGame();
             }
        }, 1000)
 
@@ -231,8 +310,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 var answer = document.createElement("button");
                 answer.id = "answer" + i;
                 answer.className = "answerBtn";
-
                 answer.innerText = Object.values(Object.values(questions)[questionCount])[i];
+
+                //Adds click functionality to answer buttons and logig for right or wrong answer
                 answer.addEventListener("click", function(){
                     if (this.innerText === Object.values(Object.values(questions))[questionCount].correctAns){
                         console.log("Correct!!");
@@ -248,7 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         questionTime -= 5;
                         if (questionTime <= 0){
                             document.getElementById("timerCount").innerText = 0;
-                            timerGameOver();
+                            endGame();
                         } else {
                             setTimeout(() => {
                                 questionCount++;
@@ -265,23 +345,80 @@ document.addEventListener("DOMContentLoaded", () => {
             quizDiv.appendChild(div);
 
         } else {
-            clearInterval(myTimer);
+            endGame();
             timer.innerText = "Finished!";
         }
     }
 
 
-    //Game Over Function if timer runs out
-    function timerGameOver() {
+    //Game over Function
+    function endGame() {
+        clearInterval(myTimer);
         clearQuizDiv();
+        endScore();
+    }
 
+    //Renders the the players score and a play again button
+    function endScore() {
         var quizDiv = document.getElementById("quizDiv");
+        var scoresList = renderHighScores();
         var div = document.createElement("div");
         var playAgainBtn = document.createElement("button");
         var scoreP =  document.createElement("p");
+        var inputDiv = document.createElement("div");
+        var form = document.createElement("form");
+        var input = document.createElement("input");
+        var submit = document.createElement("input");
+
+
+        input.id = "playersInitials";
+        input.setAttribute("type", "text");
+        input.setAttribute("maxlength", "3");
+
+        submit.id = "initialsSubmit";
+        submit.setAttribute("type", "submit");
+        submit.setAttribute("value", "Submit");
+
+        form.appendChild(input);
+        form.appendChild(submit);
+
+        form.addEventListener("submit", function(ev){
+            ev.preventDefault();
+
+            var initials = document.getElementById("playersInitials");
+            document.getElementById("initialsSubmit").disabled = true;
+
+            //Get existing scores from local storage
+            var storedScores = JSON.parse(localStorage.getItem("scores"));
+
+            if(storedScores == null) {
+                storedScores = [];
+            }
+            
+            //Set the current score and initials from input
+            var currentScores = {initials: initials.value, score: score};
+            storedScores.push(currentScores);
+            localStorage.setItem("scores", JSON.stringify(storedScores));
+
+            //Rerender High Scores
+            div.removeChild(div.childNodes[div.childNodes.length - 1])
+            scoresList = renderHighScores();
+
+            div.appendChild(scoresList);
+
+            initials.disabled = true;
+            initials.value = "";
+        })
+
+        inputDiv.id = "inputDiv";
+        inputDiv.className = "inputDiv";
+        inputDiv.innerHTML = '<p class="initialsLabel">Enter Your Initials:</p>';
+        inputDiv.appendChild(form);
 
         div.id = "questionDiv";
         div.className = "questionDiv";
+
+        scoreP.className = "finalScore";
 
         playAgainBtn.innerText = "Play Again";
         play(playAgainBtn);
@@ -289,10 +426,52 @@ document.addEventListener("DOMContentLoaded", () => {
         scoreP.innerText = "Your Score: " + score;
 
         div.appendChild(scoreP);
+        div.appendChild(inputDiv);
         div.appendChild(playAgainBtn);
+        div.appendChild(scoresList);
         quizDiv.appendChild(div);
-
     }
+
+
+
+    //Render High Score board
+    function renderHighScores() {
+        var scores = JSON.parse(localStorage.getItem("scores"));
+        if (scores == null){
+            scores = [];
+        }
+        var container = document.createElement("div");
+        var scoresDiv = document.createElement("div");
+        var scoresHeader =  document.createElement("p");
+        var ul = document.createElement("ul");
+
+        container.id = "scoreHolder";
+
+        scoresDiv.id = "scoresDiv";
+        scoresDiv.className = "scoresDiv";
+
+        scoresHeader.id = "scoresHeader";
+        scoresHeader.className = "scoresHeader";
+        scoresHeader.innerText = "Scores:"
+
+        scoresDiv.appendChild(scoresHeader);
+
+        ul.className = "scoresList";
+
+        for (i = 0; i < scores.length; i++) {
+            var li = document.createElement("li");
+            li.innerHTML= '<span class="playerName">' + scores[i].initials + '</span>   <span class="playerScore">' + "Score:  " + scores[i].score + "</span>";
+            ul.prepend(li);
+        }
+
+        scoresDiv.appendChild(ul);
+        container.appendChild(scoresDiv);
+
+        console.log(container);
+
+        return container;
+    }
+
 
 })
 

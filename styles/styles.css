@@ -30,12 +30,10 @@ body {
     margin: auto;
     font-size: 25px;
 }
-
 .startBtn {
     padding: 15px 35px;
     font-size: 25px;
 }
-
 .quizDiv {
     position: relative;
     display: block;
@@ -46,7 +44,6 @@ body {
 .quizDiv img {
     width: 100%;
 }
-
 .startDiv {
     position: absolute;
     top: 0;
@@ -57,17 +54,14 @@ body {
     align-items: center;
     justify-content: center;
 }
-
 .questionDiv {
     padding: 30px;
     text-align: center;
 }
-
 .answersDiv {
     text-align: center;
     padding: 25px;
 }
-
 .answerBtn {
     font-size: 20px;
     letter-spacing: 2px;
@@ -77,6 +71,37 @@ body {
     display: block;
     margin: 15px auto;
     padding: 10px;
+}
+.finalScore, .scoresHeader {
+    font-size: 20px;
+}
+.initialsLabel {
+    margin: auto;
+}
+.inputDiv {
+        padding: 15px 0 20px 0;
+        margin-bottom: 30px;
+        background-color: #a9dea8;
+}
+.scoresDiv {
+    margin: 30px 0px;
+    background-color: #061b82;
+    padding: 25px;
+    color: white;
+}
+.scoresList {
+        padding: 0px;
+        list-style-type: none;
+}
+.scoresList li {
+    display: flex;
+    justify-content: space-between;
+    max-width: 190px;
+    margin: auto;
+}
+
+.scoresHeader {
+    text-decoration: underline;
 }
 
 @media screen and (max-width: 767px) {
