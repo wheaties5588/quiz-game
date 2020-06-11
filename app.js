@@ -96,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
         mainDiv.appendChild(div);
     } 
 
-
     // Create div that will house the game
     function createQuizDiv() {
         var mainDiv = document.getElementById("mainContainer");
@@ -145,8 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
             ul.appendChild(li);
         }
 
-        console.log(ul);
-
         rulesDiv.id = "rulesDiv";
         rulesDiv.className = "rulesDiv";
 
@@ -159,15 +156,12 @@ document.addEventListener("DOMContentLoaded", () => {
         mainDiv.appendChild(rulesDiv);
     }
 
-
-
     //Create HTML elements
     createTopNav();
     createMain();
     timerDiv();
     rulesBlock();
     createQuizDiv();
-
 
     //Game Functionality
     var score;
@@ -289,13 +283,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     play(startButton);
 
-
     // Clears the quiz div that houses the game
     function clearQuizDiv() {
         var quizDiv = document.getElementById("quizDiv");
         quizDiv.innerHTML = "";
     }
-
 
     //Start Timer function -- sets timer to the alloted question time and starts countdown
     var questionTime;
@@ -316,7 +308,6 @@ document.addEventListener("DOMContentLoaded", () => {
        }, 1000)
 
     }
-
 
     //Render Question Function
     function renderQuestion() {
@@ -350,15 +341,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 //Adds click functionality to answer buttons and logig for right or wrong answer
                 answer.addEventListener("click", function(){
                     if (this.innerText === Object.values(Object.values(questions))[questionCount].correctAns){
-                        console.log("Correct!!");
                         this.setAttribute("style", "background-color: green");
                         setTimeout(() => {
                             questionCount++;
                             score += 5;
                             renderQuestion();
-                        }, 1000);
+                        }, 700);
                     } else {
-                        console.log("Wrong! Booo");
                         this.setAttribute("style", "background-color: red");
                         questionTime -= 5;
                         if (questionTime <= 0){
@@ -368,7 +357,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             setTimeout(() => {
                                 questionCount++;
                                 renderQuestion();
-                            }, 1000);
+                            }, 700);
                         }
                     }
                 });
@@ -498,8 +487,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         scoresDiv.appendChild(ul);
         container.appendChild(scoresDiv);
-
-        console.log(container);
 
         return container;
     }
