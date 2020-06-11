@@ -338,7 +338,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 answer.className = "answerBtn";
                 answer.innerText = Object.values(Object.values(questions)[questionCount])[i];
 
-                //Adds click functionality to answer buttons and logig for right or wrong answer
+                //Adds click functionality to answer buttons and logic for right or wrong answer
                 answer.addEventListener("click", function(){
                     if (this.innerText === Object.values(Object.values(questions))[questionCount].correctAns){
                         this.setAttribute("style", "background-color: green");
@@ -363,6 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 answersDiv.appendChild(answer);
             }
+
 
             div.appendChild(question);
             div.appendChild(answersDiv);
