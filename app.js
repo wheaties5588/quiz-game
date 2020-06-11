@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function createMain() {
         var mainDiv = document.createElement("main");
         mainDiv.id = "mainContainer";
-        mainDiv.className = "container";
+        mainDiv.className = "container-md";
         document.body.appendChild(mainDiv);
     }
 

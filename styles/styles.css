@@ -4,6 +4,13 @@
 body {
     margin: auto;
 }
+h2 {
+    font-size: 30px;
+}
+
+.container-md {
+    max-width: 800px;
+}
 .nav-back {
     background-color: #31233c!important;
 }
@@ -105,6 +112,13 @@ body {
 }
 
 @media screen and (max-width: 767px) {
+    h2 {
+        font-size: 20px;
+        margin-bottom: 0px;
+    }
+    .container-md {
+        padding: 0;
+    }
     .navbar-brand {
         width: 100%;
         margin: auto;
@@ -112,5 +126,29 @@ body {
     }
     .navbar-nav {
         margin: auto;
+    }
+    .timerDiv {
+        padding: 15px;
+    }
+    .timerText {
+        font-size: 20px;
+    }
+    .quizDiv {
+        min-height: 20px;
+    }
+    .startBtn {
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+    .answerBtn {
+        font-size: 16px;
+        letter-spacing: 1px;
+        min-width: 150px;
+        display: block;
+        margin: 10px auto;
+        padding: 5px;
+    }
+    .questionDiv {
+        padding: 25px 5px;
     }
 }
