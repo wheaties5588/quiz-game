@@ -1,7 +1,6 @@
-
 document.addEventListener("DOMContentLoaded", () => {
-
     console.log("Yer a wizard, Harry...");
+    console.log(window.location.href);
 
     // Create "nav" div that will house the link to the high scores page and the timer
     // And also include the page title
@@ -130,18 +129,21 @@ document.addEventListener("DOMContentLoaded", () => {
     createQuizDiv();
 
 
+    //Game Functionality
+    var score;
+
     var questionCount = 0;
     var questions = {
         q1: {
             question: "What is Harry's last name?",
             ans1: "Smith",
             ans2: "Potter",
-            ans3: "Dumbledor",
+            ans3: "Dumbledore",
             ans4: "Snape",
             correctAns: "Potter"
         },
         q2: {
-            question: "What is the name of Albus Dumbledor's brother?",
+            question: "What is the name of Albus Dumbledore's brother?",
             ans1: "Aberforth",
             ans2: "James",
             ans3: "Lupin",
@@ -149,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
             correctAns: "Aberforth"
         },
         q3: {
-            question: "When Dumbledor dies, who becomes the rightful owner of the Elder Wand?",
+            question: "When Dumbledore dies, who becomes the rightful owner of the Elder Wand?",
             ans1: "Harry Potter",
             ans2: "Bellatrix Lestrange",
             ans3: "Draco Malfoy",
@@ -158,19 +160,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-
-
-    //Start Game
-
+    //Start Game - give functionality to the start button
     var startButton = document.getElementById("startBtn");
-    startButton.addEventListener("click", function(){
-        // clearQuizDiv();
-        startTimer();
-        renderQuestion();
-    })
+
+    //Function to add start game sunctionality to item
+    function play(x) {
+        x.addEventListener("click", function(){
+            score = 0;
+
+            startTimer();
+            renderQuestion();
+        })
+    }
+    play(startButton);
 
 
-
+    // Clears the quiz div that houses the game
     function clearQuizDiv() {
         var quizDiv = document.getElementById("quizDiv");
         quizDiv.innerHTML = "";
@@ -178,111 +183,116 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     //Start Timer function -- sets timer to the alloted question time and starts countdown
+    var questionTime;
+    var myTimer;
+
     function startTimer() {
-        var questionTime = 90;
+        questionTime = 5;
         var timer = document.getElementById("timerCount");
         timer.innerText = questionTime;
 
-            setInterval(function() {
+            myTimer = setInterval(function() {
             if(questionTime > 0){
                 questionTime--;
                 timer.innerHTML = questionTime;
             } else {
-                clearInterval();
-                gameOver();
+                clearInterval(myTimer);
+                timerGameOver();
             }
-        }, 1000)
+       }, 1000)
 
     }
 
 
     //Render Question Function
     function renderQuestion() {
-        console.log(questionCount);
         clearQuizDiv();
+
+        var timer = document.getElementById("timerCount");
         var quizDiv = document.getElementById("quizDiv");
         var div = document.createElement("div");
         var question = document.createElement("h2");
+        var answersDiv = document.createElement("div");
+
+        if(questionCount < Object.values(questions).length) {
+
+            div.id = "questionDiv";
+            div.className = "questionDiv";
+
+            question.classname = "question";
+            question.innerText = Object.values(questions)[questionCount].question;
+
+            answersDiv.id = "answersDiv";
+            answersDiv.className = "answersDiv";
+
+
+            //Loops over the values in each question from the "questions" object, puts them in an element, and adds an event listener for click
+            for (i = 1; i < Object.values(Object.values(questions)[questionCount]).length - 1; i++ ) {
+                var answer = document.createElement("button");
+                answer.id = "answer" + i;
+                answer.className = "answerBtn";
+
+                answer.innerText = Object.values(Object.values(questions)[questionCount])[i];
+                answer.addEventListener("click", function(){
+                    if (this.innerText === Object.values(Object.values(questions))[questionCount].correctAns){
+                        console.log("Correct!!");
+                        this.setAttribute("style", "background-color: green")
+                        setTimeout(() => {
+                            questionCount++;
+                            score += 5;
+                            renderQuestion();
+                        }, 1000);
+                    } else {
+                        console.log("Wrong! Booo");
+                        this.setAttribute("style", "background-color: red");
+                        questionTime -= 5;
+                        if (questionTime <= 0){
+                            document.getElementById("timerCount").innerText = 0;
+                            timerGameOver();
+                        } else {
+                            setTimeout(() => {
+                                questionCount++;
+                                renderQuestion();
+                            }, 1000);
+                        }
+                    }
+                });
+                answersDiv.appendChild(answer);
+            }
+
+            div.appendChild(question);
+            div.appendChild(answersDiv);
+            quizDiv.appendChild(div);
+
+        } else {
+            clearInterval(myTimer);
+            timer.innerText = "Finished!";
+        }
+    }
+
+
+    //Game Over Function if timer runs out
+    function timerGameOver() {
+        clearQuizDiv();
+
+        var quizDiv = document.getElementById("quizDiv");
+        var div = document.createElement("div");
+        var playAgainBtn = document.createElement("button");
+        var scoreP =  document.createElement("p");
 
         div.id = "questionDiv";
         div.className = "questionDiv";
 
-        question.classname = "question"
-        //question.innerText = Object.value[questionCount];
+        playAgainBtn.innerText = "Play Again";
+        play(playAgainBtn);
 
-        console.log(Object.values(questions)[questionCount].question);
+        scoreP.innerText = "Your Score: " + score;
 
-        question.innerText = Object.values(questions)[questionCount].question;
-        div.appendChild(question);
-
-
-
+        div.appendChild(scoreP);
+        div.appendChild(playAgainBtn);
         quizDiv.appendChild(div);
-        questionCount++;
-    }
-
-
-
-
-
-    //Game Over Function
-    function gameOver() {
 
     }
-
-
-
-
-
-    // var quizTime = 15;
-
-    //     var startButton = document.getElementById("startBtn");
-    //     startButton.addEventListener("click", alertMe);
-    //     var timeNum = document.getElementById("timerCount");
-    
-    // function alertMe() {
-    //     setInterval(function() {
-    //         if(quizTime > 0){
-    //             quizTime--;
-    //             timeNum.innerHTML = quizTime;
-    //             console.log(quizTime);
-    //         } else {
-    //             clearInterval();
-    //         }
-
-    //     }, 1000)
-    // }
-
-
-
-
-
-
-    // //Timer - Countdown Function
-    // document.getElementById("startBtn").addEventListener("click", function() {
-    //     var timeNum = document.getElementById("timerCount");
-
-
-    //         setInterval(function() {
-    //             quizTime--;
-    //             timeNum.innerHTML = quizTime;
-    //             console.log(quizTime);
-    
-    //         }, 1000)
-    // })
-
-
-
-
-
-
-    // function startTimer() {
-
-    // setTimeout(function() {
-    //     alert("Game Over!");
-
-    // }, 3000);
-    // }
 
 })
 

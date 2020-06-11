@@ -63,6 +63,22 @@ body {
     text-align: center;
 }
 
+.answersDiv {
+    text-align: center;
+    padding: 25px;
+}
+
+.answerBtn {
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: white;
+    background-color: #2d06a7;
+    min-width: 200px;
+    display: block;
+    margin: 15px auto;
+    padding: 10px;
+}
+
 @media screen and (max-width: 767px) {
     .navbar-brand {
         width: 100%;
