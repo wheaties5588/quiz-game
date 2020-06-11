@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+   
     console.log("Yer a wizard, Harry...");
 
     // Create "nav" div that will house the link to the high scores page and the timer
@@ -24,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         header.id = "header";
 
         topNav.id = "topNav";
-        topNav.classpanName = "navbar navbar-exd-lg navbar-dark nav-back"
+        topNav.className = "navbar navbar-exd-lg navbar-dark nav-back";
 
         brand.className = "navbar-brand";
         brand.setAttribute("href", "./index.html");
@@ -316,7 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 answer.addEventListener("click", function(){
                     if (this.innerText === Object.values(Object.values(questions))[questionCount].correctAns){
                         console.log("Correct!!");
-                        this.setAttribute("style", "background-color: green")
+                        this.setAttribute("style", "background-color: green");
                         setTimeout(() => {
                             questionCount++;
                             score += 5;
@@ -431,8 +432,6 @@ document.addEventListener("DOMContentLoaded", () => {
         div.appendChild(scoresList);
         quizDiv.appendChild(div);
     }
-
-
 
     //Render High Score board
     function renderHighScores() {
