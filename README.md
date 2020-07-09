@@ -5,7 +5,7 @@
 #### By Matthew Wieciech
 ​
 ## Description
-A times trivia game that is Harry Potter themed! Answer 10 questions before the 60 second timer runs out. Keeps and updated scoreboard in local storage.
+A timed trivia game that is Harry Potter themed! Answer 10 questions before the 60 second timer runs out. Keeps and updated scoreboard in local storage.
 ​
 ## Features
 ​
